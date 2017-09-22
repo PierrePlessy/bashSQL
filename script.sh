@@ -1,4 +1,5 @@
 #!/bin/bash
+#Create by Pierre Plessy
 
 let "nbInsert  = 0"
 back_path="/home/pierre/Bureau"
