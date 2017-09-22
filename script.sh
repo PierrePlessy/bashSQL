@@ -3,12 +3,15 @@
 
 let "nbInsert  = 0"
 back_path="/home/pierre/Bureau"
+user="root"
+password="root"
 
-echo "DROP DATABASE ynov;" | mysql -proot
+
+echo "DROP DATABASE ynov;" | mysql -p$password
 rm $back_path/backup-*
 #Create DB
-echo "CREATE DATABASE ynov;" | mysql -proot
-echo "USE ynov; CREATE TABLE T_1 ( id INT );" | mysql -proot
+echo "CREATE DATABASE ynov;" | mysql -p$password
+echo "USE ynov; CREATE TABLE T_1 ( id INT );" | mysql -p$password
 
 #Insert of the 100
 
@@ -18,8 +21,8 @@ let "inse = nbInsert + 1"
 let "nbInsert = nbInsert + 100"
 for i in `seq $inse $nbInsert`;
 do
-	#echo "USE ynov;" | mysql -proot
-	echo "USE ynov;  INSERT INTO T_1 (ID) VALUES ($i);" | mysql -proot
+
+	echo "USE ynov;  INSERT INTO T_1 (ID) VALUES ($i);" | mysql -p$password
 
 done
 
@@ -31,7 +34,7 @@ echo "$nbInsert"
 backup() 
 {
 
-mysqldump -u root -proot > $back_path/backup-$nbInsert.sql
+mysqldump -u $user -p$password > $back_path/backup-$nbInsert.sql
 #echo "backup"
 
 }
@@ -40,7 +43,7 @@ mysqldump -u root -proot > $back_path/backup-$nbInsert.sql
 deleteContain()
 {
 
-echo "USE ynov; TRUNCATE TABLE T_1;" | mysql -proot
+echo "USE ynov; TRUNCATE TABLE T_1;" | mysql -p$password
 #echo "delete"
 
 }
