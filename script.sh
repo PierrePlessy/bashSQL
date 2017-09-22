@@ -1,9 +1,10 @@
 #!/bin/bash
 
 let "nbInsert  = 0"
+back_path="/home/pierre/Bureau"
 
 echo "DROP DATABASE ynov;" | mysql -proot
-rm backup-*
+rm $back_path/backup-*
 #Create DB
 echo "CREATE DATABASE ynov;" | mysql -proot
 echo "USE ynov; CREATE TABLE T_1 ( id INT );" | mysql -proot
@@ -29,7 +30,7 @@ echo "$nbInsert"
 backup() 
 {
 
-mysqldump -u root -proot > /home/pierre/Bureau/backup-$nbInsert.sql
+mysqldump -u root -proot > $back_path/backup-$nbInsert.sql
 #echo "backup"
 
 }
